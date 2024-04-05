@@ -26,6 +26,11 @@ clean_submission_2024 <- function(df2024_submission){
   
   df2024_submission$`student country`[df2024_submission$us]='USA'
   
+  df2024_submission$`phd years` = sapply(df2024_submission$`phd years`, unlist)
+  df2024_submission$`num workshop` = sapply(df2024_submission$`num workshop`, unlist)
+  
+  df2024_submission$id <- rownames(df2024_submission)
+  
   graduateDf <- df2024_submission[(df2024_submission$`student degree program` == "PhD" | df2024_submission$`student degree program` == "Master's") & df2024_submission$us, ] 
   
   intergraduateDf <- df2024_submission[(df2024_submission$`student degree program` == "PhD" | df2024_submission$`student degree program` == "Master's") & !df2024_submission$us, ] 
@@ -34,7 +39,7 @@ clean_submission_2024 <- function(df2024_submission){
   
   postdocDf <- df2024_submission[(df2024_submission$`student degree program` == "Post Doc or Early Career (PhD + 3 yrs)"), ] 
   
-  output_columns_names <- c("student name","student email" ,"student affiliation","student country","student pronouns", "student degree program", "phd years" , "num workshop","advisor name","advisor email","student tutorial talk","student day","student poster", "student wholeweek", "student pref roommate","student accommodations")
+  output_columns_names <- c("id","student name","student email" ,"student affiliation","student country","student pronouns", "student degree program", "phd years" , "num workshop","advisor name","advisor email","student tutorial talk","student day","student poster", "student wholeweek", "student pref roommate","student accommodations")
   
   return(list(graduateDf[,output_columns_names], intergraduateDf[,output_columns_names], undergraduateDf[,output_columns_names], postdocDf[,output_columns_names]) )
 }

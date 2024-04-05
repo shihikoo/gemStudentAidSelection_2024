@@ -24,6 +24,8 @@ postdocDf <- processDF(postdocDf,"postdoc",10)
 
 combinedDF <- rbind(graduateDf, intergraduateDf, undergraduateDf, postdocDf)
 
+# combinedDF$id <- paste(rownames(combinedDF), combinedDF$cat)
+
 missingApplication <- merge(combinedDF, recommendation_2024, by = c('student email','advisor email'), all.y = TRUE)
 missingApplication <- missingApplication[is.na(missingApplication$`student name`),]
 
@@ -33,8 +35,8 @@ tableColumnNames <- c("student email","advisor email" ,"student affiliation", "p
 
 # sheet_write(combinedDF[is.na(combinedDF[combinedDF$student_name_recommendation,]),], ss = googleSheetId2024, sheet = "Decisions")
 
-# write.csv2(combinedDF)
+write.csv(combinedDF, file = "combinedDF.csv", row.names = FALSE)
 
-rm(recommendation_2024, tutorial_2024, rep_2024 )
+# rm(recommendation_2024, tutorial_2024, rep_2024 )
 
 
