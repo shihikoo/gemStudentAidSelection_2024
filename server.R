@@ -1,8 +1,7 @@
 shinyServer(function(input, output, session){
   selectedGraduateDf <- reactive({ 
     selectedDf <-graduateDf[,tableColumnNames]
-    selectedDf[1:input$number,"selected"] <- TRUE
-    selectedDf <-selectedDf[selectedDf$selected,tableColumnNames]
+    # selectedDf <-selectedDf[selectedDf$selected,tableColumnNames]
     return(selectedDf)
   })
   # output$graduateN <- reactive({ nrows(graduateDf)  })

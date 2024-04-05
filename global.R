@@ -15,12 +15,12 @@ intergraduateDf <- merge(merge(merge(intergraduateDf, recommendation_2024, by = 
 
 undergraduateDf <- merge(merge(merge(undergraduateDf, recommendation_2024, by = c('student email','advisor email'), all.x = TRUE), tutorial_2024, by = 'student email' , all.x = TRUE), rep_2024, by = 'student email' , all.x = TRUE) 
 
-postdocDf <- merge(merge(merge(postdocDf, recommendation_2024, by = c('student email','advisor email'), all.x = TRUE), tutorial_2024, by = 'student email' , all.x = TRUE), rep_2024, by = 'student email' , all.x = TRUE) a
+postdocDf <- merge(merge(merge(postdocDf, recommendation_2024, by = c('student email','advisor email'), all.x = TRUE), tutorial_2024, by = 'student email' , all.x = TRUE), rep_2024, by = 'student email' , all.x = TRUE) 
 
-graduateDf <- processDF(graduateDf,"graduate")
-intergraduateDf <- processDF(intergraduateDf,"international")
-undergraduateDf <- processDF(undergraduateDf,"undergraduate")
-postdocDf <- processDF(postdocDf,"postdoc")
+graduateDf <- processDF(graduateDf,"graduate", 84)
+intergraduateDf <- processDF(intergraduateDf,"international", 4)
+undergraduateDf <- processDF(undergraduateDf,"undergraduate",4)
+postdocDf <- processDF(postdocDf,"postdoc",10)
 
 combinedDF <- rbind(graduateDf, intergraduateDf, undergraduateDf, postdocDf)
 
@@ -29,9 +29,11 @@ missingApplication <- missingApplication[is.na(missingApplication$`student name`
 
 missingRecommendation <- combinedDF[is.na(combinedDF$student_name_recommendation),]
 
-tableColumnNames <- c("student email","advisor email" ,"student affiliation", "phd years", "num workshop","advisor name","inneed","tutorial", "rep","student wholeweek","randomNumberGenerated")
+tableColumnNames <- c("student email","advisor email" ,"student affiliation", "phd years", "num workshop","advisor name","inneed","tutorial", "rep","student wholeweek","randomNumberGenerated","selected")
 
 # sheet_write(combinedDF[is.na(combinedDF[combinedDF$student_name_recommendation,]),], ss = googleSheetId2024, sheet = "Decisions")
+
+# write.csv2(combinedDF)
 
 rm(recommendation_2024, tutorial_2024, rep_2024 )
 

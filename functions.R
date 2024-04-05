@@ -81,7 +81,7 @@ selectionRun <- function(x) {
   return(runif(1,min=0.3*(x=='zero'),max=1)) 
 }
 
-processDF <- function(graduateDf, category){
+processDF <- function(graduateDf, category, selectionNum){
   graduateDf$cat <- category
   
   graduateDf$randomNumberGenerated <- sapply(graduateDf$`num workshop`, selectionRun)
@@ -99,6 +99,10 @@ processDF <- function(graduateDf, category){
   graduateDf$randomNumberGenerated[graduateDf$`student poster` == "No"] = -999
   
   graduateDf <- graduateDf[order(graduateDf$randomNumberGenerated, decreasing = TRUE),]
+  
+  graduateDf$selected <- FALSE
+  graduateDf$selected[1:selectionNum] <- TRUE 
+  graduateDf$selected[graduateDf$randomNumberGenerated == -999] <- FALSE
   
   return(graduateDf)
 }
