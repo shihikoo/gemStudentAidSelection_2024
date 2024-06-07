@@ -126,7 +126,7 @@ function(request) {
     
   ))
   
-  dashboardPage(dashboardHeader(title = "2023 GEM Financial Aid Application"),
+  dashboardPage(dashboardHeader(title = "2024 GEM Financial Aid Application"),
                 sidebar,
                 body)
   

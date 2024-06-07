@@ -12,6 +12,8 @@ library(gsubfn)
 
 clean_submission_2024 <- function(df2024_submission){
   colnames(df2024_submission) <- tolower(colnames(df2024_submission))
+  colnames(df2024_submission) <- gsub('-', ' ', colnames(df2024_submission))
+  
   df2024_submission <- df2024_submission[df2024_submission$status != "delete",]
   df2024_submission$duplicate <- duplicated(df2024_submission$`student email`)
   if (sum(df2024_submission$duplicate) > 0) {
@@ -46,6 +48,7 @@ clean_submission_2024 <- function(df2024_submission){
 
 clean_recommendation_2024 <- function(df2024_recommendation){
   colnames(df2024_recommendation) <- tolower(colnames(df2024_recommendation))
+  colnames(df2024_recommendation) <- gsub('-', ' ', colnames(df2024_recommendation))
   
   df2024_recommendation[is.na(df2024_recommendation$status),'status'] <- "Current"
   df2024_recommendation <- df2024_recommendation[df2024_recommendation$status != "delete",]
